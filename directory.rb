@@ -4,8 +4,9 @@ def print_header
 end
 
 def print(students)
-  students.select{ |student| student[:name].chr == "a" }
-  .each { |student| puts "#{student[:name]} (#{student[:cohort]} cohort)" }
+  students.each { |student|
+    puts "#{student[:name]} (#{student[:cohort]} cohort)"
+  }
 end
 
 def print_footer(students)
