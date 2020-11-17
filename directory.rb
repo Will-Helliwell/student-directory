@@ -1,18 +1,31 @@
 $cohorts = %w(january february march april may june july august september october november december)
 $default_cohort = "november"
 
-def print_header
+def show_header
   puts "The students of Villains Academy".center(50)
   puts "-------------".center(50)
 end
 
-def print(students)
+def show(students)
+  # create an array of existing cohorts
+  existing_cohorts = Array.new
   students.each { |student|
-    puts "#{student[:name]} (#{student[:cohort]} cohort)".center(50)
+    # puts "#{student[:cohort]}""
+    if !existing_cohorts.include?(student[:cohort])
+      existing_cohorts << student[:cohort]
+    end
+  }
+  # print students from each cohort in order
+  existing_cohorts.each{ |month|
+    students.each{ |student|
+      if student[:cohort] == month
+        puts "#{student[:name]} (#{student[:cohort]} cohort)".center(50)
+      end
+    }
   }
 end
 
-def print_footer(students)
+def show_footer(students)
   puts "Overall, we have #{students.count} great students".center(50)
 end
 
@@ -30,8 +43,6 @@ def input_students
     while true do
       puts "Cohort:"
       cohort = gets.chomp.downcase
-      puts "captured: before#{cohort}after"
-      puts cohort.class
       break if $cohorts.include?(cohort)
       if cohort == ""
         cohort = $default_cohort
@@ -47,6 +58,6 @@ def input_students
 end
 
 students = input_students
-print_header
-print(students)
-#print_footer(students)
+show_header
+show(students)
+show_footer(students)
