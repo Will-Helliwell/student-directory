@@ -1,3 +1,5 @@
+$cohorts = %w(january february march april may june july august september october november december)
+$default_cohort = "november"
 
 def print_header
   puts "The students of Villains Academy".center(50)
@@ -18,23 +20,21 @@ def input_students
   students = Array.new
   puts "Please enter the name and cohort of each student"
   puts "To finish, just hit return twice"
-  
+
   while true do
-    default_cohort = "november"
     # get name, and break if nothing entered
     puts "Name:"
     name = gets.chomp
     break if name == ""
     # get cohort, only accepting months + nothing entered (which defaults to default_month)
     while true do
-      cohorts = %w(january february march april may june july august september october november december)
       puts "Cohort:"
       cohort = gets.chomp.downcase
       puts "captured: before#{cohort}after"
       puts cohort.class
-      break if cohorts.include?(cohort)
+      break if $cohorts.include?(cohort)
       if cohort == ""
-        cohort = default_cohort
+        cohort = $default_cohort
         break
       end
     end
