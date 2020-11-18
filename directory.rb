@@ -36,12 +36,12 @@ def input_students
   while true do
     # get name, and break if nothing entered
     puts "Name:"
-    name = gets.chomp
+    name = gets.gsub(/\n$/, "")
     break if name == ""
     # get cohort, only accepting months + nothing entered (which defaults to default_month)
     while true do
       puts "Cohort:"
-      cohort = gets.chomp.downcase
+      cohort = gets.gsub(/\n$/, "").downcase
       break if @cohorts.include?(cohort)
       if cohort == ""
         cohort = @default_cohort
