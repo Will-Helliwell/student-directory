@@ -59,6 +59,7 @@ def input_students
 end
 
 input_students
+exit if @students.length == 0
 show_header
 show
 show_footer
