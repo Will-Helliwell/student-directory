@@ -11,7 +11,6 @@ def show
   # create an array of existing cohorts
   existing_cohorts = Array.new
   @students.each { |student|
-    # puts "#{student[:cohort]}""
     if !existing_cohorts.include?(student[:cohort])
       existing_cohorts << student[:cohort]
     end
@@ -51,7 +50,11 @@ def input_students
     end
     # add name and cohort to array of hashes, print student count
     @students << { name: name, cohort: cohort.to_sym}
-    puts "Now we have #{@students.count} students"
+    if @students.length == 1
+      puts "Now we have 1 student"
+    else
+      puts "Now we have #{@students.count} students"
+    end
   end
 end
 
