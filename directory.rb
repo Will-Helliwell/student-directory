@@ -1,4 +1,5 @@
 @students = Array.new # an empty array accessible to all methods
+@default_cohort = "november"
 
 def try_load_students
   filename = ARGV.first
@@ -51,7 +52,7 @@ def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
   name = STDIN.gets.chomp
-  cohort = "november"
+  cohort = @default_cohort
   while !name.empty?
     add_student(name, cohort)
     puts "Now we have #{@students.count} students"
