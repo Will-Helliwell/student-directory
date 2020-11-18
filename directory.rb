@@ -35,12 +35,32 @@ end
 
 def process(selection)
   case selection
-    when "1" then input_students
-    when "2" then print_directory
-    when "3" then save_students
-    when "4" then load_students
-    when "9" then exit
+    when "1"
+     confirm_choice(selection)
+     input_students
+    when "2"
+     confirm_choice(selection)
+     print_directory
+    when "3"
+     confirm_choice(selection)
+     save_students
+    when "4"
+     confirm_choice(selection)
+     load_students
+    when "9"
+     confirm_choice(selection)
+     exit
     else puts "I don't know what you meant, try again"
+  end
+end
+
+def confirm_choice(selection)
+  case selection
+  when "1" then puts "\nYou have chosen option 1, input students."
+  when "2" then puts "\nYou have chosen option 2, show students."
+  when "3" then puts "\nYou have chosen option 3, save students."
+  when "4" then puts "\nYou have chosen option 4, load students."
+  when "9" then puts "\nYou have chosen option 9, exiting program..."
   end
 end
 
