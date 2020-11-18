@@ -1,5 +1,5 @@
-$cohorts = %w(january february march april may june july august september october november december)
-$default_cohort = "november"
+@cohorts = %w(january february march april may june july august september october november december)
+@default_cohort = "november"
 
 def show_header
   puts "The students of Villains Academy".center(50)
@@ -43,9 +43,9 @@ def input_students
     while true do
       puts "Cohort:"
       cohort = gets.chomp.downcase
-      break if $cohorts.include?(cohort)
+      break if @cohorts.include?(cohort)
       if cohort == ""
-        cohort = $default_cohort
+        cohort = @default_cohort
         break
       end
     end
