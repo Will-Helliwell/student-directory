@@ -1,15 +1,16 @@
 @cohorts = %w(january february march april may june july august september october november december)
 @default_cohort = "november"
+@students = Array.new
 
 def show_header
   puts "The students of Villains Academy".center(50)
   puts "-------------".center(50)
 end
 
-def show(students)
+def show
   # create an array of existing cohorts
   existing_cohorts = Array.new
-  students.each { |student|
+  @students.each { |student|
     # puts "#{student[:cohort]}""
     if !existing_cohorts.include?(student[:cohort])
       existing_cohorts << student[:cohort]
@@ -17,7 +18,7 @@ def show(students)
   }
   # print students from each cohort in order
   existing_cohorts.each{ |month|
-    students.each{ |student|
+    @students.each{ |student|
       if student[:cohort] == month
         puts "#{student[:name]} (#{student[:cohort]} cohort)".center(50)
       end
@@ -25,12 +26,11 @@ def show(students)
   }
 end
 
-def show_footer(students)
-  puts "Overall, we have #{students.count} great students".center(50)
+def show_footer
+  puts "Overall, we have #{@students.count} great students".center(50)
 end
 
 def input_students
-  students = Array.new
   puts "Please enter the name and cohort of each student"
   puts "To finish, just hit return twice"
 
@@ -50,14 +50,12 @@ def input_students
       end
     end
     # add name and cohort to array of hashes, print student count
-    students << { name: name, cohort: cohort.to_sym}
-    puts "Now we have #{students.count} students"
+    @students << { name: name, cohort: cohort.to_sym}
+    puts "Now we have #{@students.count} students"
   end
-
-  students
 end
 
-students = input_students
+input_students
 show_header
-show(students)
-show_footer(students)
+show
+show_footer
