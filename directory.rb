@@ -1,18 +1,41 @@
 @students = Array.new # an empty array accessible to all methods
 
-def print_header
-  puts "The students of Villains Academy"
-  puts "-------------"
-end
-
-def print_students_list
-  @students.each do |student|
-    puts "#{student[:name]} (#{student[:cohort]} cohort)"
+def try_load_students
+  filename = ARGV.first
+  return if filename.nil?
+  if File.exists?(filename)
+    load_students(filename)
+    puts "Loaded #{@students.count} from #{filename}"
+  else
+    puts "Sorry, #{filename} does not exist"
+    exit
   end
 end
 
-def print_footer
-  puts "Overall, we have #{@students.count} great students"
+def print_menu
+  puts "1. Input the students"
+  puts "2. Show the students"
+  puts "3. Save the students"
+  puts "4. Load the students"
+  puts "9. Exit"
+end
+
+def interactive_menu
+  loop do
+    print_menu
+    process(STDIN.gets.chomp)
+  end
+end
+
+def process(selection)
+  case selection
+    when "1" then input_students
+    when "2" then print_directory
+    when "3" then save_students
+    when "4" then load_students
+    when "9" then exit
+    else puts "I don't know what you meant, try again"
+  end
 end
 
 def input_students
@@ -27,36 +50,25 @@ def input_students
   end
 end
 
-def interactive_menu
-  loop do
-    print_menu
-    process(STDIN.gets.chomp)
-  end
-end
-
-def print_menu
-  puts "1. Input the students"
-  puts "2. Show the students"
-  puts "3. Save the students"
-  puts "4. Load the students"
-  puts "9. Exit"
-end
-
 def print_directory
   print_header
   print_students_list
   print_footer
 end
 
-def process(selection)
-  case selection
-    when "1" then input_students
-    when "2" then print_directory
-    when "3" then save_students
-    when "4" then load_students
-    when "9" then exit
-    else puts "I don't know what you meant, try again"
+def print_header
+  puts "The students of Villains Academy"
+  puts "-------------"
+end
+
+def print_students_list
+  @students.each do |student|
+    puts "#{student[:name]} (#{student[:cohort]} cohort)"
   end
+end
+
+def print_footer
+  puts "Overall, we have #{@students.count} great students"
 end
 
 def save_students
@@ -82,17 +94,17 @@ def load_students(filename = "students.csv")
   file.close
 end
 
-def try_load_students
-  filename = ARGV.first
-  return if filename.nil?
-  if File.exists?(filename)
-    load_students(filename)
-    puts "Loaded #{@students.count} from #{filename}"
-  else
-    puts "Sorry, #{filename} does not exist"
-    exit
-  end
-end
+
+
+
+
+
+
+
+
+
+
+
 
 def add_student(name, cohort)
     @students << {name: name, cohort: cohort.to_sym}
