@@ -1,3 +1,5 @@
+require 'csv'
+
 @students = Array.new # an empty array accessible to all methods
 @default_cohort = "november"
 
@@ -102,13 +104,12 @@ def print_footer
 end
 
 def save_students
-  File.open(ask_for_filename, "w") do |file|
+  CSV.open(ask_for_filename, "w") do |csv|
   # for each student, convert their hash data to an array, then a csv string.
   # then write it to the file
     @students.each{ |student|
-      student_data = [student[:name], student[:cohort]]
-      csv_line = student_data.join(",")
-      file.puts csv_line
+      csv_line = [student[:name], student[:cohort]]
+      csv << csv_line
     }
   end
 end
@@ -126,7 +127,6 @@ def ask_for_filename
   puts "Type the name of the file you would like to load from / save as:"
   STDIN.gets.chomp
 end
-
 
 try_load_students
 interactive_menu
