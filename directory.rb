@@ -126,5 +126,13 @@ def ask_for_filename
   STDIN.gets.chomp
 end
 
+def print_source_code
+  File.open($0, "r") do |file|
+    file.readlines.each do |line|
+      puts line
+    end
+  end
+end
+
 try_load_students
 interactive_menu
