@@ -102,8 +102,7 @@ def print_footer
 end
 
 def save_students
-  # open a new file students.csv and return a pointer to it ('file')
-  file = File.open("students.csv", "w")
+  file = File.open(ask_for_filename, "w")
   # for each student, convert their hash data to an array, then a csv string.
   # then write it to the file
   @students.each{ |student|
@@ -115,13 +114,18 @@ def save_students
   file.close
 end
 
-def load_students(filename = "students.csv")
+def load_students(filename = ask_for_filename)
   file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort = line.chomp.split(",")
     add_student(name, cohort)
   end
   file.close
+end
+
+def ask_for_filename
+  puts "Type the name of the file you would like to load from / save as:"
+  gets.chomp
 end
 
 
