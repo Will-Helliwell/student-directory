@@ -102,25 +102,24 @@ def print_footer
 end
 
 def save_students
-  file = File.open(ask_for_filename, "w")
+  File.open(ask_for_filename, "w") do |file|
   # for each student, convert their hash data to an array, then a csv string.
   # then write it to the file
-  @students.each{ |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
-  }
-  # close the file
-  file.close
+    @students.each{ |student|
+      student_data = [student[:name], student[:cohort]]
+      csv_line = student_data.join(",")
+      file.puts csv_line
+    }
+  end
 end
 
 def load_students(filename = ask_for_filename)
-  file = File.open(filename, "r")
-  file.readlines.each do |line|
-    name, cohort = line.chomp.split(",")
-    add_student(name, cohort)
+  File.open(filename, "r") do |file|
+    file.readlines.each do |line|
+      name, cohort = line.chomp.split(",")
+      add_student(name, cohort)
+    end
   end
-  file.close
 end
 
 def ask_for_filename
